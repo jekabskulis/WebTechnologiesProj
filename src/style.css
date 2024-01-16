@@ -42,7 +42,7 @@ body
     cursor: pointer;
 }
 
-.products__item__img
+.products__item__imgage
 {
     display: block;
     width: 90%;
@@ -64,7 +64,7 @@ body
 
 .item__overlay
 {
-    display: block;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -72,4 +72,31 @@ body
     width: 100%;
     background-color: rgba(220, 220, 220, 0.75);
     z-index: 10;
+}
+
+.item__overlay__info
+{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 75%;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    border: 10px solid rgb(140, 140, 140);
+    border-radius: 10px;
+    z-index: 15;
+}
+
+.item__overlay__info__image
+{
+    width: 100%;
+}
+
+.item__overlay__info__text > *
+{
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
