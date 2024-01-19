@@ -1,5 +1,5 @@
 
-//const item1 = document.getElementById("item-1");
+
 const itemOverlay = document.getElementById("item__overlay");
 const itemOverlaySelect = document.getElementById("item__overlay__info")
 const imageList = document.getElementById("images");
@@ -13,6 +13,8 @@ const imagePhotographer = document.getElementById("image-photographer");
 
 let checkOverlaySelect = true;
 
+let imageElementArr = [];
+let imageOverlayArr = [];
 let imageAmount = 1;
 let imageInfo = [
     {
@@ -27,54 +29,123 @@ let imageInfo = [
 
 const renderImageList = () =>
 {
-    console.log(`Image #${imageAmount} added to screen.`);
-    imageList.innerHTML += `
-    <div class="images__item" id="item-${imageAmount}">
-    <img src="${imageInfo[imageAmount - 1].source}" 
-    alt="${imageInfo[imageAmount - 1].name}, ${imageInfo[imageAmount - 1].date}, ${imageInfo[imageAmount - 1].location}" class="images__item__imgage">
+    console.log(`Image #${imageAmount+1} added to screen.`);
+    let newImageBox = `
+    <div class="images__item" id="item-${imageAmount+1}">
+    <img src="${imageInfo[imageAmount].source}" 
+    alt="${imageInfo[imageAmount].name}, ${imageInfo[imageAmount].date}, ${imageInfo[imageAmount].location}" class="images__item__imgage">
     
     <div class="images__item__text">
-    <h3 class="images__item__text__header">Name: ${imageInfo[imageAmount - 1].name}</h3>
-    <p class="images__item__text__location">Location: ${imageInfo[imageAmount - 1].location}</p>
+    <h3 class="images__item__text__header">Name: ${imageInfo[imageAmount].name}</h3>
+    <p class="images__item__text__location">Location: ${imageInfo[imageAmount].location}</p>
     </div>
     </div>
     `;
+
+    let newImageOverlayBox = `
+    <div class="item__overlay__info" id="item__overlay__info-${imageAmount+1}">
+        <img src="${imageInfo[imageAmount].source}" 
+        alt="${imageInfo[imageAmount].name}, ${imageInfo[imageAmount].date}, ${imageInfo[imageAmount].location}" class="item__overlay__info__image">
+    <div class="item__overlay__info__unselect"></div>
+    </img>
+                <div class="item__overlay__info__text">
+                    <div class="item__overlay__info__unselect"></div>
+                    <h3 class="item__overlay__info__text__header"><b>Name:</b> ${imageInfo[imageAmount].name}</h3>
+                    <p class="item__overlay__info__text__description">
+                        ${imageInfo[imageAmount].description}
+                    </p>
+                    <p class="item__overlay__info__text__date"><b>Date:</b> ${imageInfo[imageAmount].date}</p>
+                    <p class="item__overlay__info__text__location"><b>Location:</b> ${imageInfo[imageAmount].location}</p>
+                    <p class="item__overlay__info__text__photographer"><b>Photographer:</b> ${imageInfo[imageAmount].photohrapher}</p>
+                </div>
+            </div>
+    `;
+    imageList.insertAdjacentHTML("beforeend", newImageBox);
+    itemOverlay.insertAdjacentHTML("beforeend", newImageOverlayBox);
     imageAmount++;
 }
 
 const addToImageList = () =>
 {
-
+    imageInfo[imageAmount] = {
+        name: imageName.value,
+        source: imageSrc.value,
+        description: imageDesc.value,
+        date: imageDate.value,
+        location: imageLocation.value,
+        photohrapher: imagePhotographer.value
+    };
 }
 
 const inputValidation = () =>
 {
-
+    if((imageName !== null) && (imageSrc !== null) && (imageDesc !== null) && (imageDate !== null) && 
+    (imageLocation !== null) && (imagePhotographer !== null))
+    {
+        return true;
+    }
+    else
+    {
+        console.log(imageName, "\n", imageSrc, "\n", imageDesc, "\n", imageDate, "\n", imageLocation, "\n", imagePhotographer);
+        alert("Before submitting information, please check whether everything is filled out!");
+    }
+    return false;
 }
 
-/*
-item1.addEventListener("click", () => 
+const addToOverlay = () =>
 {
-    itemOverlay.style.display = "block";
-});
-*/
+    imageElementArr[imageAmount-1] = document.getElementById(`item-${imageAmount}`);
+    imageOverlayArr[imageAmount-1] = document.getElementById(`item__overlay__info-${imageAmount}`);
+    for(let i = 0; i < imageAmount; i++)
+    {
+        imageElementArr[i].addEventListener("click", () =>
+        {
+            imageOverlayArr[i].style.display = "flex";
+            itemOverlay.style.display = "block";
+        });
+        imageOverlayArr[i].addEventListener("click", () =>
+        {
+            checkOverlaySelect = false;
+        });
+    }
+}
+
+
 itemOverlay.addEventListener("click", () =>
 {
     if(checkOverlaySelect)
     {
         itemOverlay.style.display = "none";
+        for(let i = 0; i < imageAmount; i++)
+        {
+            imageOverlayArr[i].style.display = "none";
+        }
     }
     checkOverlaySelect = true;
 });
 
-
-
-itemOverlaySelect.addEventListener("click", () =>
-{
-    checkOverlaySelect = false;
-});
-
 submitBtn.addEventListener("click", () =>
 {
-    renderImageList();
+    if(inputValidation())
+    {
+        addToImageList();
+        renderImageList();
+        addToOverlay();
+    }
+    
+});
+
+
+
+imageElementArr[0] = document.getElementById(`item-${1}`);
+imageOverlayArr[0] = document.getElementById(`item__overlay__info-${1}`);
+console.log(imageOverlayArr[0]);
+imageElementArr[0].addEventListener("click", () =>
+{
+    imageOverlayArr[0].style.display = "flex";
+    itemOverlay.style.display = "block";
+});
+imageOverlayArr[0].addEventListener("click", () =>
+{
+    checkOverlaySelect = false;
 });
