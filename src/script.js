@@ -15,7 +15,7 @@ let checkOverlaySelect = true;
 
 let imageElementArr = [];
 let imageOverlayArr = [];
-let imageAmount = 1;
+let imageAmount = 2;
 let imageInfo = [
     {
         name: "Arctic fox",
@@ -24,6 +24,14 @@ let imageInfo = [
         date: "Summer, 2023.",
         location: "<b>Finland</b>, Northern Lapland, Utsjoki.",
         photohrapher: "Petri Piisilä."
+    },
+    {
+        name: "Maine Coon",
+        source: "https://www.thesprucepets.com/thmb/aWULXjTWxZbCJ4GixA7JMw8K15w=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-1189893683-e0ff70596b3b4f0687ba573e5a671f74.jpg",
+        description: "The Maine Coon is a large domesticated cat breed. It is one of the oldest natural breeds in North America. The breed originated in the U.S. state of Maine, where it is the official state cat.",
+        date: "Unknown",
+        location: "Comfortable bed",
+        photohrapher: "Alexandra Jursova"
     }
 ];
 
@@ -46,19 +54,16 @@ const renderImageList = () =>
     <div class="item__overlay__info" id="item__overlay__info-${imageAmount+1}">
         <img src="${imageInfo[imageAmount].source}" 
         alt="${imageInfo[imageAmount].name}, ${imageInfo[imageAmount].date}, ${imageInfo[imageAmount].location}" class="item__overlay__info__image">
-    <div class="item__overlay__info__unselect"></div>
-    </img>
-                <div class="item__overlay__info__text">
-                    <div class="item__overlay__info__unselect"></div>
-                    <h3 class="item__overlay__info__text__header"><b>Name:</b> ${imageInfo[imageAmount].name}</h3>
-                    <p class="item__overlay__info__text__description">
-                        ${imageInfo[imageAmount].description}
-                    </p>
-                    <p class="item__overlay__info__text__date"><b>Date:</b> ${imageInfo[imageAmount].date}</p>
-                    <p class="item__overlay__info__text__location"><b>Location:</b> ${imageInfo[imageAmount].location}</p>
-                    <p class="item__overlay__info__text__photographer"><b>Photographer:</b> ${imageInfo[imageAmount].photohrapher}</p>
-                </div>
-            </div>
+        <ul class="item__overlay__info__text">
+            <li><h3 class="item__overlay__info__text__header"><b>Name:</b> ${imageInfo[imageAmount].name}</h3></li>
+            <li class="item__overlay__info__text__description">
+                ${imageInfo[imageAmount].description}
+            </li>
+            <li class="item__overlay__info__text__date"><b>Date:</b> ${imageInfo[imageAmount].date}</li>
+            <li class="item__overlay__info__text__location"><b>Location:</b> ${imageInfo[imageAmount].location}</li>
+            <li class="item__overlay__info__text__photographer"><b>Photographer:</b> ${imageInfo[imageAmount].photohrapher}</li>
+        </ul>
+    </div>
     `;
     imageList.insertAdjacentHTML("beforeend", newImageBox);
     itemOverlay.insertAdjacentHTML("beforeend", newImageOverlayBox);
@@ -79,15 +84,15 @@ const addToImageList = () =>
 
 const inputValidation = () =>
 {
-    if((imageName !== null) && (imageSrc !== null) && (imageDesc !== null) && (imageDate !== null) && 
-    (imageLocation !== null) && (imagePhotographer !== null))
+    if((imageName.value!== "") && (imageSrc.value !== "") && (imageDesc.value !== "") && (imageDate.value !== "") && 
+    (imageLocation.value !== "") && (imagePhotographer.value !== ""))
     {
         return true;
     }
     else
     {
-        console.log(imageName, "\n", imageSrc, "\n", imageDesc, "\n", imageDate, "\n", imageLocation, "\n", imagePhotographer);
-        alert("Before submitting information, please check whether everything is filled out!");
+        //console.log(imageName, "\n", imageSrc, "\n", imageDesc, "\n", imageDate, "\n", imageLocation, "\n", imagePhotographer);
+        //alert("Before submitting information, please check whether everything is filled out!");
     }
     return false;
 }
@@ -96,7 +101,7 @@ const addToOverlay = () =>
 {
     imageElementArr[imageAmount-1] = document.getElementById(`item-${imageAmount}`);
     imageOverlayArr[imageAmount-1] = document.getElementById(`item__overlay__info-${imageAmount}`);
-    for(let i = 0; i < imageAmount; i++)
+    for(let i = 2; i < imageAmount; i++)
     {
         imageElementArr[i].addEventListener("click", () =>
         {
@@ -136,7 +141,7 @@ submitBtn.addEventListener("click", () =>
 });
 
 
-
+//First two images.
 imageElementArr[0] = document.getElementById(`item-${1}`);
 imageOverlayArr[0] = document.getElementById(`item__overlay__info-${1}`);
 console.log(imageOverlayArr[0]);
@@ -146,6 +151,19 @@ imageElementArr[0].addEventListener("click", () =>
     itemOverlay.style.display = "block";
 });
 imageOverlayArr[0].addEventListener("click", () =>
+{
+    checkOverlaySelect = false;
+});
+
+imageElementArr[1] = document.getElementById(`item-${2}`);
+imageOverlayArr[1] = document.getElementById(`item__overlay__info-${2}`);
+console.log(imageOverlayArr[1]);
+imageElementArr[1].addEventListener("click", () =>
+{
+    imageOverlayArr[1].style.display = "flex";
+    itemOverlay.style.display = "block";
+});
+imageOverlayArr[1].addEventListener("click", () =>
 {
     checkOverlaySelect = false;
 });

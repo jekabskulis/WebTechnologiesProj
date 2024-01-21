@@ -11,16 +11,16 @@
         <div class="below-item__overlay">
             <h1 class="header" style="font-family: 'Times New Roman', Times, serif">BGC</h1>
             <div class="flex-container">
-                <div class="info-input">
-                    <p>Name: <input type="text" size="25" id="image-name"></p>
-                    <p>Source: <input type="text" size="24" id="image-source"></p>
-                    <p>Description:</p>
+                <form action="http://naivist.net/form/" class="info-input">
+                    <p><label for="image-name">Name: </label><input type="text" size="25" id="image-name" required></p>
+                    <p><label for="image-source">Source: </label><input type="text" size="24" id="image-source" required></p>
+                    <p><label for="image-description" required>Description:</label></p>
                     <p><textarea cols="32" rows="12" id="image-description"></textarea></p>
-                    <p>Date: <input type="text" size="26" id="image-date"></p>
-                    <p>Location: <input type="text" size="23" id="image-location"></p>
-                    <p>Photographer: <input type="text" size="18" id="image-photographer"></p>
-                    <p><button id="submit-info">Submit</button></p>
-                </div>
+                    <p><label for="image-date">Date: </label><input type="text" size="26" id="image-date" required></p>
+                    <p><label for="image-location">Location: </label><input type="text" size="22" id="image-location" required></p>
+                    <p><label for="image-photographer">Photographer: </label><input type="text" size="17" id="image-photographer" required></p>
+                    <p><button type="submit" id="submit-info" required>Submit</button></p>
+                </form>
                 <div class="images" id="images">
                     <div class="images__item" id="item-1">
                         <img src="https://www.nationalparks.fi/documents/10550/60895402/Naalinpentuja_Utsjoella_kesalla_2023_PetriPiisilaMH_1050.jpg/b28d37ae-dc79-124a-c853-d2ae7d6f3b03?t=1694170568964" 
@@ -31,6 +31,15 @@
                             <p class="images__item__text__location">Location: <b>Finland</b>, Northern Lapland, Utsjoki</p>
                         </div>
                     </div>
+                    <div class="images__item" id="item-2">
+                        <img src="https://www.thesprucepets.com/thmb/aWULXjTWxZbCJ4GixA7JMw8K15w=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-1189893683-e0ff70596b3b4f0687ba573e5a671f74.jpg" 
+                        alt="Maine Coon laying comfortably on a bed." class="images__item__imgage">
+        
+                        <div class="images__item__text">
+                            <h3 class="images__item__text__header">Name: Maine Coon</h3>
+                            <p class="images__item__text__location">Location: Comfortable bed</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,24 +47,35 @@
             <div class="item__overlay__info" id="item__overlay__info-1">
                 <img src="https://www.nationalparks.fi/documents/10550/60895402/Naalinpentuja_Utsjoella_kesalla_2023_PetriPiisilaMH_1050.jpg/b28d37ae-dc79-124a-c853-d2ae7d6f3b03?t=1694170568964" 
                 alt="Cubs of arctic foxes, Utsjoki 2023" class="item__overlay__info__image">
-            <div class="item__overlay__info__unselect"></div>
-            </img>
-                <div class="item__overlay__info__text">
-                    <div class="item__overlay__info__unselect"></div>
-                    <h3 class="item__overlay__info__text__header"><b>Name:</b> Arctic Fox</h3>
-                    <p class="item__overlay__info__text__description">
+                <ul class="item__overlay__info__text">
+                    <li><h3 class="item__overlay__info__text__header"><b>Name:</b> Arctic Fox</h3></li>
+                    <li class="item__overlay__info__text__description">
                         Four Arctic fox cubs in front of the den.
                         Arctic foxes are currently unable to survive in Finland without additional feeding.
                         <br>
                         Arctic foxes can survive frigid Arctic temperatures as low as 50 degrees Celsius.
                         Arctic foxes lives in burrows, and in a blizzard they may tunnel into the snow to create shelter.
-                    </p>
-                    <p class="item__overlay__info__text__date"><b>Date:</b> Summer, 2023.</p>
-                    <p class="item__overlay__info__text__location"><b>Location:</b> <b>Finland</b>, Northern Lapland, Utsjoki.</p>
-                    <p class="item__overlay__info__text__photographer"><b>Photographer:</b> Petri Piisilä.</p>
-                </div>
+                    </li>
+                    <li class="item__overlay__info__text__date"><b>Date:</b> Summer, 2023.</li>
+                    <li class="item__overlay__info__text__location"><b>Location:</b> <b>Finland</b>, Northern Lapland, Utsjoki.</li>
+                    <li class="item__overlay__info__text__photographer"><b>Photographer:</b> Petri Piisilä.</li>
+                </ul>
             </div>
-
+            <div class="item__overlay__info" id="item__overlay__info-2">
+                <img src="https://www.thesprucepets.com/thmb/aWULXjTWxZbCJ4GixA7JMw8K15w=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-1189893683-e0ff70596b3b4f0687ba573e5a671f74.jpg"
+                alt="Maine Coon laying comfortably on a bed." class="item__overlay__info__image">
+                <ul class="item__overlay__info__text info__text--times-new-roman">
+                    <li><h3 class="item__overlay__info__text__header"><b>Name:</b> <i>Maine Coon</i></h3></li>
+                    <li class="item__overlay__info__text__description">
+                        The Maine Coon is a large domesticated cat breed. 
+                        It is one of the oldest natural breeds in North America. 
+                        The breed originated in the U.S. state of Maine, where it is the official state cat.
+                    </li>
+                    <li class="item__overlay__info__text__date"><b>Date:</b> Unknown.</li>
+                    <li class="item__overlay__info__text__location"><b>Location:</b> Quite conmfortable bed.</li>
+                    <li class="item__overlay__info__text__photographer"><b>Photographer:</b> Alexandra Jursova.</li>
+                </ul>
+            </div>
         </div>
     </div>
 
