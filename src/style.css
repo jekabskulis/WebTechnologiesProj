@@ -117,3 +117,8 @@ body
 {
     margin-left: 30px;
 }
+
+.info__text--times-new-roman
+{
+    font-family: 'Times New Roman', Times, serif;
+}
