@@ -67,6 +67,11 @@ const renderImageList = () =>
     `;
     imageList.insertAdjacentHTML("beforeend", newImageBox);
     itemOverlay.insertAdjacentHTML("beforeend", newImageOverlayBox);
+
+    //jQuery
+    //$("#images").append(newImageBox);
+    //$("#item__overlay").append(newImageOverlayBox);
+    
     imageAmount++;
 }
 
@@ -91,7 +96,7 @@ const inputValidation = () =>
     }
     else
     {
-        //console.log(imageName, "\n", imageSrc, "\n", imageDesc, "\n", imageDate, "\n", imageLocation, "\n", imagePhotographer);
+        console.log(imageName.value, "\n", imageSrc.value, "\n", imageDesc.value, "\n", imageDate.value, "\n", imageLocation.value, "\n", imagePhotographer.value);
         //alert("Before submitting information, please check whether everything is filled out!");
     }
     return false;
@@ -101,18 +106,19 @@ const addToOverlay = () =>
 {
     imageElementArr[imageAmount-1] = document.getElementById(`item-${imageAmount}`);
     imageOverlayArr[imageAmount-1] = document.getElementById(`item__overlay__info-${imageAmount}`);
-    for(let i = 2; i < imageAmount; i++)
+        
+    imageElementArr[imageAmount-1].addEventListener("click", () =>
     {
-        imageElementArr[i].addEventListener("click", () =>
-        {
-            imageOverlayArr[i].style.display = "flex";
-            itemOverlay.style.display = "block";
-        });
-        imageOverlayArr[i].addEventListener("click", () =>
-        {
-            checkOverlaySelect = false;
-        });
-    }
+        //imageOverlayArr[imageAmount-1].style.display = "flex";
+        //itemOverlay.style.display = "block";
+        //jQuery
+        $(`#item__overlay__info-${imageAmount}`).css("display", "flex");
+        $(`#item__overlay`).css("display", "block");
+    });
+    imageOverlayArr[imageAmount-1].addEventListener("click", () =>
+    {
+        checkOverlaySelect = false;
+    });
 }
 
 
@@ -124,6 +130,8 @@ itemOverlay.addEventListener("click", () =>
         for(let i = 0; i < imageAmount; i++)
         {
             imageOverlayArr[i].style.display = "none";
+            //jQuery
+            //$(`#item__overlay__info-${i+1}`).css("display", "none");
         }
     }
     checkOverlaySelect = true;
